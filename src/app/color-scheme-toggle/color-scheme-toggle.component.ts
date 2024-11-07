@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
@@ -40,9 +40,18 @@ select
   border: 1px solid #ccc
   `]
 })
-export class ColorSchemeToggleComponent {
+export class ColorSchemeToggleComponent implements OnInit {
   schemes: ColorSchemeType[] = ['default', 'protanopia', 'deuteranopia', 'tritanopia'];
   selectedScheme: ColorSchemeType = 'default';
+
+  ngOnInit() {
+    // Load saved scheme from localStorage
+    const savedScheme = localStorage.getItem('colorScheme') as ColorSchemeType;
+    if (savedScheme && this.schemes.includes(savedScheme)) {
+      this.selectedScheme = savedScheme;
+      this.onSchemeChange(savedScheme);
+    }
+  }
 
   onSchemeChange(scheme: ColorSchemeType) {
     const root = document.documentElement;
@@ -72,5 +81,8 @@ export class ColorSchemeToggleComponent {
         root.style.setProperty('--warning-color', '#854d0e');
         root.style.setProperty('--danger-color', '#b91c1c');
     }
+    
+    // Save selected scheme to localStorage
+    localStorage.setItem('colorScheme', scheme);
   }
 }
