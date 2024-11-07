@@ -1,0 +1,11 @@
+<div class="color-scheme-toggle">
+  <label for="colorScheme">Color Mode:</label>
+  <select 
+    id="colorScheme" 
+    [(ngModel)]="selectedScheme"
+    (ngModelChange)="onSchemeChange($event)">
+    @for (scheme of schemes; track scheme) {
+      <option [value]="scheme">{{ scheme }}</option>
+    }
+  </select>
+</div>

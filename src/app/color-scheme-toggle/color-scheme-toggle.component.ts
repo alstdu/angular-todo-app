@@ -8,37 +8,8 @@ type ColorSchemeType = 'default' | 'protanopia' | 'deuteranopia' | 'tritanopia';
   selector: 'app-color-scheme-toggle',
   standalone: true,
   imports: [CommonModule, FormsModule],
-  template: `
-    <div class="color-scheme-toggle">
-      <label for="colorScheme">Color Mode:</label>
-      <select 
-        id="colorScheme" 
-        [(ngModel)]="selectedScheme"
-        (ngModelChange)="onSchemeChange($event)">
-        @for (scheme of schemes; track scheme) {
-          <option [value]="scheme">{{ scheme }}</option>
-        }
-      </select>
-    </div>
-  `,
-  styles: [`
-.color-scheme-toggle
-  position: absolute
-  top: 20px
-  right: 20px
-  display: flex
-  align-items: center
-  gap: 8px
-  background: white
-  padding: 8px
-  border-radius: 8px
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1)
-
-select
-  padding: 4px 8px
-  border-radius: 4px
-  border: 1px solid #ccc
-  `]
+  templateUrl: './color-scheme-toggle.component.html',
+  styleUrl: './color-scheme-toggle.component.sass'
 })
 export class ColorSchemeToggleComponent implements OnInit {
   schemes: ColorSchemeType[] = ['default', 'protanopia', 'deuteranopia', 'tritanopia'];
