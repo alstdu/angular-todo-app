@@ -1,10 +1,10 @@
 // Accessible color variables with verified contrast ratios
-$primary-color: #0048a3    // 5.13:1 against white
-$success-color: #276749    // 5.02:1 against white
-$warning-color: #854d0e    // 5.15:1 against white
-$danger-color: #b91c1c     // 5.03:1 against white
+$primary-color: var(--primary-color)
+$success-color: var(--success-color)
+$warning-color: var(--warning-color)
+$danger-color: var(--danger-color)
+$text-color: var(--text-color)
 $background-color: #ffffff  // White background
-$text-color: #1a2234       // 13.25:1 against white - main text
 $gray-light: #f8f9fa
 $gray-medium: #5f666d      // 5.54:1 against white - secondary text
 $border-radius: 8px
@@ -52,8 +52,7 @@ $box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1)
     font-weight: 500
 
     &:hover
-      background-color: darken($primary-color, 5%)
-      // Hover state maintains 5.0+ contrast
+      filter: brightness(0.95)
 
 .todo-section
   background: $background-color
