@@ -6,3 +6,9 @@ export interface Todo {
   completed: boolean;
   priority?: Priority;
 }
+
+export interface TodoList {
+  id: string;
+  name: string;
+  todos: Todo[];
+}

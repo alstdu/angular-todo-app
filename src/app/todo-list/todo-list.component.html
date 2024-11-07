@@ -1,3 +1,56 @@
+<div class="lists-nav">
+  <button 
+    *ngIf="showScrollButtons" 
+    class="scroll-button left" 
+    (click)="scrollLists('left')"
+    aria-label="Scroll lists left">
+    ←
+  </button>
+
+  <div class="lists-container">
+    @for (list of todoLists; track list.id) {
+      <button 
+        class="list-tab" 
+        [class.active]="list.id === currentListId"
+        (click)="currentListId = list.id">
+        {{ list.name }}
+        <span 
+          class="delete-list" 
+          (click)="$event.stopPropagation(); deleteList(list.id)">
+          ×
+        </span>
+      </button>
+    }
+    
+    @if (!showNewListInput) {
+      <button 
+        class="new-list-button" 
+        (click)="showNewListInput = true">
+        + New List
+      </button>
+    }
+  </div>
+
+  <button 
+    *ngIf="showScrollButtons" 
+    class="scroll-button right" 
+    (click)="scrollLists('right')"
+    aria-label="Scroll lists right">
+    →
+  </button>
+</div>
+
+@if (showNewListInput) {
+  <div class="new-list-input">
+    <input 
+      [(ngModel)]="newListName" 
+      placeholder="List name"
+      (keyup.enter)="createNewList(newListName)">
+    <button (click)="createNewList(newListName)">Create</button>
+    <button (click)="showNewListInput = false">Cancel</button>
+  </div>
+}
+
 <div class="todo-input">
   <input 
     type="text" 
@@ -15,7 +68,7 @@
 <div class="todo-section">
   <h2>Active Tasks</h2>
   <div class="todo-list">
-    <div *ngFor="let todo of activeTodos" class="todo-item">
+    <div *ngFor="let todo of currentTodos" class="todo-item">
       <input 
         type="checkbox" 
         [checked]="todo.completed"
