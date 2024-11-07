@@ -1,0 +1,47 @@
+<div class="todo-input">
+  <input 
+    type="text" 
+    [(ngModel)]="newTodoTitle" 
+    placeholder="Add new todo"
+    (keyup.enter)="addTodo()">
+  <select [(ngModel)]="newTodoPriority" class="priority-select">
+    <option *ngFor="let priority of priorities" [value]="priority">
+      {{priority | titlecase}}
+    </option>
+  </select>
+  <button (click)="addTodo()">Add</button>
+</div>
+
+<div class="todo-section">
+  <h2>Active Tasks</h2>
+  <div class="todo-list">
+    <div *ngFor="let todo of activeTodos" class="todo-item">
+      <input 
+        type="checkbox" 
+        [checked]="todo.completed"
+        (change)="toggleTodo(todo)">
+      <span>{{todo.title}}</span>
+      <span class="priority-badge" [class]="todo.priority">
+        {{todo.priority}}
+      </span>
+      <button class="delete-btn" (click)="deleteTodo(todo.id)">Delete</button>
+    </div>
+  </div>
+</div>
+
+<div class="todo-section" *ngIf="completedTodos.length > 0">
+  <h2>Completed Tasks</h2>
+  <div class="todo-list">
+    <div *ngFor="let todo of completedTodos" class="todo-item completed">
+      <input 
+        type="checkbox" 
+        [checked]="todo.completed"
+        (change)="toggleTodo(todo)">
+      <span>{{todo.title}}</span>
+      <span class="priority-badge" [class]="todo.priority">
+        {{todo.priority}}
+      </span>
+      <button class="delete-btn" (click)="deleteTodo(todo.id)">Delete</button>
+    </div>
+  </div>
+</div>
