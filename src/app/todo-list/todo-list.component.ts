@@ -18,6 +18,7 @@ export class TodoListComponent implements OnInit {
 
   newTodoTitle: string = '';
   newTodoPriority: Priority = 'low'; // default priority
+  newTodoDueDate: string = '';  // For the date input
 
   // Array of available priorities for the dropdown
   priorities: Priority[] = ['low', 'medium', 'high'];
@@ -94,12 +95,14 @@ export class TodoListComponent implements OnInit {
         id: this.currentTodos.length + 1,
         title: this.newTodoTitle.trim(),
         completed: false,
-        priority: this.newTodoPriority
+        priority: this.newTodoPriority,
+        dueDate: this.newTodoDueDate ? new Date(this.newTodoDueDate) : undefined
       };
       this.currentList.todos.push(newTodo);
       this.saveTodoLists();
       this.newTodoTitle = '';
       this.newTodoPriority = 'low';
+      this.newTodoDueDate = '';
     }
   }
 
@@ -137,5 +140,9 @@ export class TodoListComponent implements OnInit {
         behavior: 'smooth'
       });
     }
+  }
+
+  isOverdue(date: Date): boolean {
+    return new Date(date) < new Date(new Date().setHours(0, 0, 0, 0));
   }
 }

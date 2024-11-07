@@ -53,7 +53,6 @@
 
 <div class="todo-input">
   <input 
-    type="text" 
     [(ngModel)]="newTodoTitle" 
     placeholder="Add new todo"
     (keyup.enter)="addTodo()">
@@ -62,6 +61,10 @@
       {{priority | titlecase}}
     </option>
   </select>
+  <input
+    type="date"
+    [(ngModel)]="newTodoDueDate"
+    placeholder="Due date (optional)">
   <button (click)="addTodo()">Add</button>
 </div>
 
@@ -77,6 +80,11 @@
       <span class="priority-badge" [class]="todo.priority">
         {{todo.priority}}
       </span>
+      @if (todo.dueDate) {
+        <span class="due-date" [class.overdue]="isOverdue(todo.dueDate)">
+          {{ todo.dueDate | date:'mediumDate' }}
+        </span>
+      }
       <button class="delete-btn" (click)="deleteTodo(todo.id)">Delete</button>
     </div>
   </div>
@@ -94,6 +102,11 @@
       <span class="priority-badge" [class]="todo.priority">
         {{todo.priority}}
       </span>
+      @if (todo.dueDate) {
+        <span class="due-date" [class.overdue]="isOverdue(todo.dueDate)">
+          {{ todo.dueDate | date:'mediumDate' }}
+        </span>
+      }
       <button class="delete-btn" (click)="deleteTodo(todo.id)">Delete</button>
     </div>
   </div>

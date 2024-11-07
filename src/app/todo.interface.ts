@@ -4,7 +4,8 @@ export interface Todo {
   id: number;
   title: string;
   completed: boolean;
-  priority?: Priority;
+  priority: Priority;
+  dueDate?: Date;
 }
 
 export interface TodoList {
