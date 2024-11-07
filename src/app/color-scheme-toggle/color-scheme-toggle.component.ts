@@ -9,7 +9,7 @@ type ColorSchemeType = 'default' | 'protanopia' | 'deuteranopia' | 'tritanopia';
   standalone: true,
   imports: [CommonModule, FormsModule],
   templateUrl: './color-scheme-toggle.component.html',
-  styleUrl: './color-scheme-toggle.component.sass'
+  styleUrls: ['./color-scheme-toggle.component.sass']
 })
 export class ColorSchemeToggleComponent implements OnInit {
   schemes: ColorSchemeType[] = ['default', 'protanopia', 'deuteranopia', 'tritanopia'];
